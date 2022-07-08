@@ -1,4 +1,5 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { TribeEntity } from "../tribe/tribe.entity";
 
 @Entity('organization')
 export class OrganizationEntity {
@@ -26,5 +27,8 @@ export class OrganizationEntity {
         nullable: false,
     })
     status: number;
+
+    @OneToMany(type => TribeEntity, tribe => tribe.organization)
+    tribe: TribeEntity[];
     
 }

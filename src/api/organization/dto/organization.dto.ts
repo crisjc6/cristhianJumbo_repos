@@ -1,4 +1,5 @@
 import { IsNotEmpty, isNotEmpty, IsNumber, IsOptional, IsString, Max, MaxLength } from "class-validator";
+import { TribeEntity } from "../../tribe/tribe.entity";
 
 export class CreateOrganizationDto {
 
@@ -15,6 +16,8 @@ export class CreateOrganizationDto {
     @IsNumber()
     @IsNotEmpty()
     status: number;
+
+    tribe: TribeEntity[];
 }
 
 export class UpdateOrganizationDto {
@@ -32,4 +35,6 @@ export class UpdateOrganizationDto {
     @IsNumber()
     @IsOptional()
     status: number;
+
+    tribe: TribeEntity[];
 }

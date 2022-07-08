@@ -1,4 +1,6 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { MetricsEntity } from "../metrics/metrics.entity";
+import { TribeEntity } from "../tribe/tribe.entity";
 
 @Entity('repository')
 export class RepositoryEntity {
@@ -39,4 +41,15 @@ export class RepositoryEntity {
         enum: ['A', 'I'],
     })
     status: string;
+
+    
+    @ManyToOne(type => TribeEntity, tribe => tribe.repository)
+    tribe: TribeEntity | number | string;
+
+    @OneToOne(
+        type => MetricsEntity,
+        metrics => metrics.repository,
+    )
+    @JoinColumn()
+    metrics?: MetricsEntity;
 }

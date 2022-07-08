@@ -1,4 +1,5 @@
 import { IsDateString, IsEnum, IsNotEmpty, IsNumber, IsOptional, IsString, MaxLength } from "class-validator";
+import { TribeEntity } from "../../tribe/tribe.entity";
 
 export class CreateRepositoryDto {
 
@@ -26,6 +27,7 @@ export class CreateRepositoryDto {
     @IsNotEmpty()
     status: string;
 
+    tribe: TribeEntity | number | string;
 
 }
 
@@ -53,6 +55,8 @@ export class UpdateRepositoryDto {
     @MaxLength(1)
     @IsOptional()
     status: string;
+
+    tribe: TribeEntity | number | string;
 
 
 }

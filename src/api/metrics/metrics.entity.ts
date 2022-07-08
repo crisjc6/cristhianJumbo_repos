@@ -1,4 +1,5 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, OneToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { RepositoryEntity } from "../repository/repository.entity";
 
 @Entity('metrics')
 export class MetricsEntity {
@@ -47,4 +48,10 @@ export class MetricsEntity {
         nullable: false,
     })
     code_smells: number;
+
+    @OneToOne(
+        type => RepositoryEntity,
+        repository => repository.metrics,
+    )
+    repository: RepositoryEntity;
 }
