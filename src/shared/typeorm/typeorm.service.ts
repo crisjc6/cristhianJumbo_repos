@@ -15,8 +15,12 @@ export class TypeOrmConfigService implements TypeOrmOptionsFactory {
       migrations: ['dist/migrations/*.{ts,js}'],
       migrationsTableName: 'typeorm_migrations',
       logger: 'file',
-      synchronize: true,
-      dropSchema: true
+      retryDelay: 40000,
+      retryAttempts: 3,
+      connectTimeoutMS: 40000,
+      keepConnectionAlive: true,
+      dropSchema: false,
+      ssl: false,
     };
   }
 }

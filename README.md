@@ -51,3 +51,4 @@ Entonces se debe obtener un listado de organizaciones
 ![image](https://user-images.githubusercontent.com/50051312/178063358-022863b3-b4af-4ec1-8086-455d2d8e4641.png)
 ![image](https://user-images.githubusercontent.com/50051312/178063384-486de699-3859-4e2f-9f41-eada9b5c9181.png)
 
+## Ejercicio 3

@@ -22,17 +22,20 @@ export class RepositoryEntity {
 
     @Column({
         type: 'enum',
-        name: 'estado',
+        name: 'state',
         enum: ['E', 'D', 'A'],
     })
     state: string;
 
-    @Column({ type: 'timestamptz' })
+    @Column({ 
+        type: 'timestamptz',
+        name: 'create_time', 
+    })
     createTime: Date;
 
     @Column({
         type: 'enum',
-        name: 'estado',
+        name: 'status',
         enum: ['A', 'I'],
     })
     status: string;
