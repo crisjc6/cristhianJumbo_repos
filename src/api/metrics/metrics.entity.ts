@@ -53,5 +53,5 @@ export class MetricsEntity {
         type => RepositoryEntity,
         repository => repository.metrics,
     )
-    repository: RepositoryEntity;
+    repository?: RepositoryEntity;
 }
