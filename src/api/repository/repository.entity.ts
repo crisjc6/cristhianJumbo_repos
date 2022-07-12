@@ -49,6 +49,7 @@ export class RepositoryEntity {
     @OneToOne(
         type => MetricsEntity,
         metrics => metrics.repository,
+        { cascade: true }
     )
     @JoinColumn()
     metrics?: MetricsEntity;
