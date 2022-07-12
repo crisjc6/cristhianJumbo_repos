@@ -35,6 +35,25 @@ export class RepositoryController extends PrincipalAbstractController<CreateRepo
     }
   
 
+    @Get('/csv/:id')
+    async csvStream( @Param('id') idTribe, @Req() req, @Res({ passthrough: true }) res): Promise<StreamableFile | any> {
+      try {
+        res.set({
+          'Content-Type': 'text/plain'
+      });
+      const pathCsv  =  __dirname + '/../../public/';
+      const guardar = await this._repositoryService.getAllRepositories(idTribe);
+      const file = path.join(pathCsv, 'report.csv');
+      const readStream = fs.createReadStream(file);
+      return new StreamableFile(readStream);
+      } catch (error) {
+        console.error('Error en controller reporteRepos', error);
+        return {
+          error: 500,
+          message: 'Error al generar reporte ',
+        };
+      }
+    }
 
 
     @Get(':id')
