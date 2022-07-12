@@ -1,8 +1,9 @@
-import { Body, Controller, Get, HttpStatus, Param, Put, Res } from '@nestjs/common';
+import { Body, Controller, Get, HttpStatus, Param, Put, Req, Res, StreamableFile } from '@nestjs/common';
 import { PrincipalAbstractController } from '../principal/principal-abstract.controller';
 import { CreateRepositoryDto, UpdateRepositoryDto } from './dto/repository.dto';
 import { RepositoryService } from './repository.service';
-
+import * as fs from 'fs';
+import * as path from 'path';
 @Controller('repository')
 export class RepositoryController extends PrincipalAbstractController<CreateRepositoryDto> {
 
@@ -19,6 +20,22 @@ export class RepositoryController extends PrincipalAbstractController<CreateRepo
          const repositories = await this._repositoryService.getRepositories();
          return res.status(HttpStatus.OK).json(repositories);
     }
+
+    @Get('/query/:id')
+    async customFindRespositories(@Param('id') idTribe) {
+      try {
+        return this._repositoryService.getAllRepositories(idTribe);
+      } catch (error) {
+        console.error('Error en controller customFindRespositories', error);
+        return {
+          error: 500,
+          message: 'Error al encontrar ',
+        };
+      }
+    }
+  
+
+
 
     @Get(':id')
     async findOne(@Param('id') idRepository) {
