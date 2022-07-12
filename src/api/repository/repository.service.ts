@@ -31,7 +31,7 @@ export class RepositoryService extends PrincipalService<RepositoryEntity> {
     async getAllRepositories(idTribe) {
         try {
             const fechaAnual = '2022-01-15  10:41:30.746877';
-            const covergaLimit = 50.00;
+            const covergaLimit = 75.00;
             const enabled = 'E'
             const repositories = await this.repository
                 .createQueryBuilder('repository')
@@ -49,7 +49,7 @@ export class RepositoryService extends PrincipalService<RepositoryEntity> {
                         name: repository.name,
                         tribe: (repository.tribe as TribeEntity).name,
                         organization: ((repository.tribe as TribeEntity).organization as OrganizationEntity).name,
-                        coverage: +repository.metrics.coverage,
+                        coverage: `${+repository.metrics.coverage}%`,
                         codeSmells: +repository.metrics.code_smells,
                         bugs: +repository.metrics.code_smells,
                         vulnerabilities: +repository.metrics.vulnerabilities,
@@ -58,22 +58,22 @@ export class RepositoryService extends PrincipalService<RepositoryEntity> {
                         state: repository.state === 'E' ? 'Habilitado' : repository.state === 'D' ? 'Deshabilitado' : 'Archivado'
                     }
                 })
-                const pathCsv  =  __dirname + '/../../public/report.csv';
-                
+                const pathCsv = __dirname + '/../../public/report.csv';
+
                 const csvwriter = createObjectCsvWriter({
                     path: pathCsv,
                     header: [
-                        {id: 'id', title: 'ID'},
-                        {id: 'name', title: 'NAME'},
-                        {id: 'tribe', title: 'TRIBE'},
-                        {id: 'organization', title: 'ORGANIZATION'},
-                        {id: 'coverage', title: 'COVERAGE'},
-                        {id: 'codeSmells', title: 'CODESMELSS'},
-                        {id: 'bugs', title: 'BUGS'},
-                        {id: 'vulnerabilities', title: 'VULNERABILITIES'},
-                        {id: 'hotspots', title: 'HOTSPOTS'},
-                        {id: 'verificationState', title: 'VERIFICATION'},
-                        {id: 'state', title: 'STATE'},
+                        { id: 'id', title: 'ID' },
+                        { id: 'name', title: 'NAME' },
+                        { id: 'tribe', title: 'TRIBE' },
+                        { id: 'organization', title: 'ORGANIZATION' },
+                        { id: 'coverage', title: 'COVERAGE' },
+                        { id: 'codeSmells', title: 'CODESMELSS' },
+                        { id: 'bugs', title: 'BUGS' },
+                        { id: 'vulnerabilities', title: 'VULNERABILITIES' },
+                        { id: 'hotspots', title: 'HOTSPOTS' },
+                        { id: 'verificationState', title: 'VERIFICATION' },
+                        { id: 'state', title: 'STATE' },
                     ]
                 })
                 csvwriter.writeRecords(mapInfo)
