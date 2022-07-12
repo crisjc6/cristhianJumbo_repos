@@ -3,6 +3,13 @@
   "collection": "@nestjs/schematics",
   "sourceRoot": "src",
   "compilerOptions": {
-    "assets": ["common/envs/*"]
+    "assets": ["common/envs/*" ,
+      {
+        "include": "../public",
+        "outDir": "dist/public",
+        "watchAssets": true
+      }
+
+    ]
   }
 }
